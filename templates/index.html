@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Prediction</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <p class="eyebrow">MACHINE LEARNING PROJECT</p>
+            <h1>Loan Approval Prediction</h1>
+            <p class="subtitle">
+                Enter sample applicant details to test the demo model.
+            </p>
+        </header>
+
+        <section class="notice">
+            Educational prototype only. This model uses synthetic data
+            and must not be used for real lending decisions.
+        </section>
+
+        <form method="POST">
+            <div class="field">
+                <label for="annual_income">Annual income (₹)</label>
+                <input id="annual_income" name="annual_income"
+                       type="number" min="1" step="1"
+                       placeholder="Example: 600000"
+                       value="{{ values.get('annual_income', '') }}"
+                       required>
+            </div>
+
+            <div class="field">
+                <label for="loan_amount">Loan amount (₹)</label>
+                <input id="loan_amount" name="loan_amount"
+                       type="number" min="1" step="1"
+                       placeholder="Example: 200000"
+                       value="{{ values.get('loan_amount', '') }}"
+                       required>
+            </div>
+
+            <div class="field">
+                <label for="credit_score">Credit score (300–850)</label>
+                <input id="credit_score" name="credit_score"
+                       type="number" min="300" max="850"
+                       placeholder="Example: 720"
+                       value="{{ values.get('credit_score', '') }}"
+                       required>
+            </div>
+
+            <div class="field">
+                <label for="employment_years">Employment experience (years)</label>
+                <input id="employment_years" name="employment_years"
+                       type="number" min="0" max="60"
+                       placeholder="Example: 5"
+                       value="{{ values.get('employment_years', '') }}"
+                       required>
+            </div>
+
+            <div class="field">
+                <label for="existing_debt">Existing debt (₹)</label>
+                <input id="existing_debt" name="existing_debt"
+                       type="number" min="0" step="1"
+                       placeholder="Example: 50000"
+                       value="{{ values.get('existing_debt', '') }}"
+                       required>
+            </div>
+
+            <button type="submit">Predict Demo Result</button>
+        </form>
+
+        {% if result %}
+            <section class="result">
+                <h2>{{ result }}</h2>
+                <p>This result comes from the synthetic educational model.</p>
+            </section>
+        {% endif %}
+
+        {% if error %}
+            <section class="error">
+                <p>{{ error }}</p>
+            </section>
+        {% endif %}
+
+        <footer>
+            Loan Approval Prediction Using Machine Learning
+            <br>Academic demonstration project
+        </footer>
+    </main>
+</body>
+</html>
